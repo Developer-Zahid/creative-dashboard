@@ -1,0 +1,483 @@
+/* Reset CSS */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+::selection{
+	color: $color-white;
+	background: $color-gray;
+}
+
+html,
+body{
+	scroll-behavior: smooth;
+}
+
+html{
+	font-size: 16px;
+}
+
+body {
+	color: $color-gray;
+	font-family: $font-primary;
+	background: $color-bg-secondary;
+}
+
+a,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
+}
+
+button,
+button:hover,
+button:focus,
+button:active {
+	outline: none;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+/* Common Slick Style */
+.slick{
+	&__arrows{
+		top: 50%;
+		position: absolute;
+		width: 3rem;
+		height: 3.8rem;
+		line-height: 3.8rem;
+		color: $color-black;
+		background: $color-white;
+		font-size: 1.3rem;
+		text-align: center;
+		cursor: pointer;
+		z-index: 2;
+		transition: all ease .3s;
+		&--left{
+			left: 0;
+			transform: translate(0,-50%);
+		}
+		&--right{
+			right: 0;
+			transform: translate(0,-50%);
+		}
+		&:hover,
+		&:focus{
+			color: $color-white;
+			background: $color-primary;
+			border-color: $color-primary;
+		}
+	}
+	&-dots{
+		display: flex;
+		justify-content: center;
+		margin-bottom: 0;
+		li{
+			&:not(:last-child){
+				margin-right: 1rem;
+			}
+			button{
+				font-size: 0;
+				width: 10px;
+				height: 10px;
+				transform: scale(0.7);
+				background: $color-primary;
+				border: 1px solid $color-primary;
+				border-radius: 50%;
+			}
+			&.slick-active{
+				button{
+					transform: scale(1);
+					background: transparent;
+				}
+			}
+		}
+	}
+}
+
+/* Common Button's Style */
+.primary-btn{
+	color: $color-white;
+	font-size: 1.2rem;
+	font-family: $font-primary;
+	font-weight: 500;
+	padding: 1rem 2rem;
+	background: $color-primary;
+	&:hover,
+	&:focus{
+		color: $color-primary;
+		background: transparent;
+	}
+}
+
+/* Aside Navbar Style */
+.navbar{
+	min-width: 12rem;
+	background: $color-bg-primary;
+	@include min-desktop{
+		padding-left: 1rem;
+	}
+	@include desktop{
+		position: fixed;
+		top: 0;
+		left: 0;
+		transform: translateX(-12rem);
+		transition: transform .3s ease-in;
+		z-index: 9;
+		&.show{
+			transform: translateX(0);
+		}
+	}
+	&-brand__logo{
+		width: 4rem;
+		fill: $color-primary;
+		@include min-mobile{
+			width: 5rem;
+		}
+	}
+	&-toggler{
+		@include desktop{
+			&::before{
+				content: "";
+				position: fixed;
+				top: 0;
+				right: 0;
+				transform: translateX(100%);
+				width: 100%;
+				height: 100%;
+				background: rgba($color: #000000, $alpha: 0.4);
+				z-index: 8;
+				transition: transform 0 ease-in-out;
+			}
+		}
+		&.closer::before{
+			transform: translateX(0);
+			transition-duration: 0.4s;
+		}
+		&__icon{
+			width: 2.5rem;
+			fill: $color-primary;
+		}
+	}
+	&-link {
+		width: 100%;
+		color: $color-gray;
+		font-size: 1.1rem;
+		padding: 0.8rem 1.1rem;
+		-webkit-tap-highlight-color: transparent;
+		@extend %transition;
+		transition-property: color;
+		@include min-desktop{
+			border-radius: 3rem 0 0 3rem;
+		}
+		&__icon{
+			width: 1.3rem;
+			fill: $color-gray;
+			@extend %transition;
+		}
+		&:hover,
+		&:focus{
+			color: $color-primary;
+			.navbar-link__icon{
+				fill: currentColor;
+			}
+		}
+	}
+	&-item {
+		&:not(:last-child){
+			margin-bottom: 0.8rem;
+		}
+		&.active .navbar-link {
+			color: $color-white;
+			background-color: $color-bg-secondary;
+			&__icon{
+				fill: $color-white;
+			}
+			@include min-desktop{
+				&::before,
+				&::after {
+					content: "";
+					position: absolute;
+					right: 0;
+					background-color: transparent;
+					height: $radius * 2;
+					width: $radius;
+					pointer-events: none;
+					user-select: none;
+					-webkit-tap-highlight-color: transparent;
+				}
+				&::before {
+					top: $radius * -2;
+					border-bottom-right-radius: $radius;
+					box-shadow: 0 $radius 0 0 $color-bg-secondary;
+				}
+				&::after {
+					bottom: $radius * -2;
+					border-top-right-radius: $radius;
+					box-shadow: 0 $radius * -1 0 0 $color-bg-secondary;
+				}
+			}
+		}
+	}
+}
+
+/* Content Wrapper Style */
+.content-wrapper{
+	overflow-y: auto;
+	scrollbar-width: none;
+	&::-webkit-scrollbar{
+		width: 0;
+	}
+	@include min-desktop{
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+/* Header Style */
+.header{
+	z-index: 2;
+	background: $color-bg-secondary;
+	&::before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: calc(var(--bs-gutter-x)*-1);
+		width: calc(100% + (var(--bs-gutter-x)*2));
+		height: 100%;
+		background: inherit;
+		z-index: -1;
+	}
+	&__menu__wrapper{
+		background: inherit;
+		@include tablet{
+			width: 100%;
+		}
+	}
+	.search-box{
+		background: $color-bg-primary;
+		max-width: 20rem;
+		@extend %shadow;
+		@include min-desktop-lg{
+			max-width: 23rem;
+		}
+		@include mobile{
+			max-width: 15rem;
+		}
+		.btn,
+		.form-control{
+			color: $color-gray-soft;
+			caret-color: $color-primary;
+		}
+		.btn{
+			width: 2.6rem;
+			height: 2.6rem;
+			background: $color-bg-secondary;
+			@extend %transition;
+			@extend %shadow;
+			&__icon{
+				width: 3rem;
+			}
+			&:hover,
+			&:focus{
+				color: $color-white;
+				background: $color-primary;
+			}
+		}
+		.form-control{
+			color: $color-gray-soft;
+			&[type="search"]::-webkit-search-cancel-button{
+				display: none;
+			}
+		}
+	}
+	&__list{
+		@include tablet{
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translateY(0);
+			width: 100%;
+			height: 100%;
+			background: inherit;
+			z-index: -1;
+			transition: transform .3s linear;
+			&.show{
+				transform: translateY(calc(100% - 2px));
+			}
+		}
+		&-toggler__icon{
+			fill: $color-primary;
+			width: 2rem;
+		}
+		&__items{
+			&:not(:first-child){
+				margin-left: 1.5rem;
+			}
+		}
+		&__link{
+			&::after{
+				content: attr(aria-label);
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translate(-50%, 110%);
+				width: max-content;
+				color: $color-gray-soft;
+				background: rgba($color: #000000, $alpha: 0.4);
+				font-size: 0;
+				padding: 0.5rem 0.8rem;
+				border-radius: $radius;
+				pointer-events: none;
+				opacity: 0;
+				visibility: hidden;
+				@extend %transition;
+				z-index: 3;
+			}
+			&__icon{
+				fill: $color-gray;
+				@extend %transition;
+				&__indicator{
+					fill: $color-danger;
+				}
+			}
+			&--user{
+				color: $color-gray-soft;
+				@extend %transition;
+				> *:not(:first-child){
+					margin-left: 0.5rem;
+				}
+				.user{
+					&-image{
+						max-width: 2rem;
+					}
+					&-name,
+					&-icon{
+						@extend %transition;
+					}
+					&-name{
+						@include mobile{
+							display: none;
+						}
+					}
+				}
+			}
+			&:hover,
+			&:focus-visible{
+				&::after{
+					font-size: 0.8rem;
+					opacity: 1;
+					visibility: visible;
+				}
+				.header__list__link{
+					&__icon{
+						fill: $color-primary;
+					}
+				}
+				.theme-toggler__icon{
+					fill: $color-primary;
+				}
+				.user{
+					&-name{
+						color: $color-primary;
+					}
+					&-icon{
+						fill: $color-primary;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Theme Toggler Style */
+.theme-toggler{
+	width: 2.8rem;
+	height: 2.8rem;
+	background: $color-bg-primary;
+	@extend %shadow;
+	&__icon{
+		width: 1.4rem;
+		@extend %transition;
+		&--light{
+			fill: $color-white;
+		}
+		&--dark{
+			fill: $color-gray;
+			transform: scale(0);
+		}
+	}
+	&.toggle .theme-toggler__icon{
+		&--light{
+			transform: scale(0);
+		}
+		&--dark{
+			transform: scale(1);
+		}
+	}
+}
+
+/* Page Title Style */
+.page-title{
+	color: $color-gray-soft
+}
+
+/* Select Time Wrapper Style */
+.select-wrapper{
+	@extend %shadow;
+	&__icon{
+		left: 1rem;
+		fill: $color-gray-soft;
+		pointer-events: none;
+	}
+	.form-select{
+		color: $color-gray;
+		background-color: $color-bg-primary;
+		padding-left: 2.5rem;
+		border-radius: $radius / 1.5;
+		background-image: url("data:image/svg+xml;utf8,<svg width='16' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0' y='0' viewBox='0 0 451.847 451.847' fill='%236b6b88'><path d='M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z'/></svg>");
+		cursor: pointer;
+		option{
+			color: $color-gray-soft;
+			background-color: $color-bg-primary;
+		}
+	}
+}
+
+/* Line Chart Style */
+.line-chart-wrapper{
+	background: $color-bg-primary;
+	border-radius: $radius;
+	@extend %shadow;
+	@include tablet{
+		overflow-x: auto;
+		overflow-y: auto;
+		&__case{
+			min-width: 30rem;
+			max-height: 15rem;
+		}
+	}
+}
+
+.lightMode{
+	.navbar-item.active .navbar-link{
+		color: $color-primary;
+		&__icon{
+			fill: $color-primary;
+		}
+	}
+	.search-box .btn{
+		background: lighten($color-primary, $amount: 22);
+	}
+	.header__list__link::after{
+		color: $color-white;
+	}
+}

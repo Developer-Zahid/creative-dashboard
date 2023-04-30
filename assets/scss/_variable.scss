@@ -1,0 +1,29 @@
+// SCSS Variable's
+$font-primary: 'Poppins', sans-serif;
+$font-secondary: 'Roboto', sans-serif;
+$color-bg-primary: var(--bg-primary);
+// $color-bg-primary:#ffffff;
+$color-bg-secondary: var(--bg-secondary);
+// $color-bg-secondary:#f6f4fc;
+// $color-primary:#06b2fc;
+$color-primary:#7977fe;
+$color-danger:#f24959;
+$color-gray: var(--color-gray);
+$color-gray-soft: var(--color-gray-soft);
+$color-black:#000000;
+$color-white:#ffffff;
+$radius: 0.8rem;
+
+:root{
+    --bs-gutter-x: 15px;
+    --bg-primary: #1d1e42;
+    --bg-secondary:#141432;
+    --color-gray:#6b6b88;
+    --color-gray-soft:#cecdde;
+}
+
+.lightMode{
+    --bg-primary: #ffffff;
+    --bg-secondary:#f6f4fc;
+    --color-gray-soft:#5f5e66;
+}
